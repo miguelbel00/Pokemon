@@ -1,6 +1,3 @@
-
-Routes 
-
 get /pokemons?name
 
 si no tiene query name, trae todos los pk de la api ya formateados y de la bd
@@ -14,6 +11,13 @@ se busca por el id del pk en la bd o en la api, si no hay nada retorna not found
 post /pokemons
 
 crea un pk en Db con lo que le llega por body
+
+
+
+AllPokemons		Type		Name 	 	OrderAttack 
+Existing		Earth		 A-Z		Ascending
+Created		    Water		 Z-A		Descending
+			    ....
 
 
 
