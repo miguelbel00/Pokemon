@@ -10,12 +10,14 @@ const router = Router();
 router.get('/',async (req,res,next) => {
 
 try {
-    
-    const getTypesApi = getTypes(await axios.get("https://pokeapi.co/api/v2/type"))
-
-    Type.bulkCreate(getTypesApi)
-    return res.status(201).json({msg : "Types Created"})
-
+    let getTypesDb = await Type.findAll();
+    if (!getTypesDb.length) {
+        const getTypesApi = getTypes(await axios.get("https://pokeapi.co/api/v2/type"))
+        Type.bulkCreate(getTypesApi)
+        getTypesDb = await Type.findAll();
+    }
+    return res.status(201).json(getTypesDb) 
+   
 } catch (error) {
     next(error)
 }
