@@ -48,8 +48,9 @@ router.get("/:idPokemon", async (req, res,next) => {
 
   try {
     if (idPokemon.includes("-") && idPokemon.length === 36) {
-      const findDbPokemon = await Pokemon.findByPk(idPokemon);
-      return res.status(200).send(getFormattedPokemon(findDbPokemon));
+      console.log("entro")
+      const findDbPokemon = await Pokemon.findByPk(idPokemon,{include:{model: Type,through:{attributes:[]}}});
+      return res.status(200).send(findDbPokemon);
     }
     const findApiPokemon = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
@@ -65,7 +66,7 @@ router.get("/:idPokemon", async (req, res,next) => {
 
 router.post('/',async (req,res,next) => {
     try {
-        const newPokemon = await Pokemon.create(req.body,{include:Type});
+        const newPokemon = await Pokemon.create(req.body,{include:{model: Type,through:{attributes:[]}}});
          const relationedPokemon = await doRelations(newPokemon,req.body.types) 
         return res.status(201).json(relationedPokemon);
       } catch (error) {

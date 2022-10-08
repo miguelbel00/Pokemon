@@ -64,13 +64,16 @@ const getFormattedPokemon = (unformattedPokemon) => {
     height: pokemon.height,
     weight: pokemon.weight,
     image: pokemon.sprites.front_default,
-    types: pokemon.types.map((type) => type.type.name),
+    Types: pokemon.types.map((type) => {
+      return {"name": type.type.name}
+        }
+          ),
   };
 };
 
 const doRelations = async (newPokemon, types) => {
   await newPokemon.addTypes(await Type.findAll({ where: { name: types } }));
-  return Pokemon.findOne({ where: { id: newPokemon.id }, include: Type });
+  return Pokemon.findOne({ where: { id: newPokemon.id },include:{model: Type,through:{attributes:[]}}});
 };
 
 module.exports = {
