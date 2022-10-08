@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { Pokemon, Type } = require("../db");
 
 const getPokemons = async (urlApi, amount) => {
   let pokemons = [];
@@ -47,30 +48,31 @@ const getFormattedPokemons = async (promisesPokemon) => {
   return formattedPokemons;
 };
 
-
-
 const getFormattedPokemon = (unformattedPokemon) => {
+  pokemon = unformattedPokemon.data;
 
-    pokemon = unformattedPokemon.data;
+  return {
+    id: pokemon.id,
+    name: pokemon.name,
+    health: pokemon.stats[0].base_stat,
+    attack: pokemon.stats[1].base_stat,
+    defense: pokemon.stats[2].base_stat,
+    speed: pokemon.stats[5].base_stat,
+    height: pokemon.height,
+    weight: pokemon.weight,
+    image: pokemon.sprites.front_default,
+    types: pokemon.types.map((type) => type.type.name),
+  };
+};
 
-    return {
-      id: pokemon.id,
-      name: pokemon.name,
-      health: pokemon.stats[0].base_stat,
-      attack: pokemon.stats[1].base_stat,
-      defense: pokemon.stats[2].base_stat,
-      speed: pokemon.stats[5].base_stat,
-      height: pokemon.height,
-      weight: pokemon.weight,
-      image: pokemon.sprites.front_default,
-      types: pokemon.types.map((type) => type.type.name),
-    };
-
-
-}
+const doRelations = async (newPokemon, types) => {
+  await newPokemon.addTypes(await Type.findAll({ where: { name: types } }));
+  return Pokemon.findOne({ where: { id: newPokemon.id }, include: Type });
+};
 
 module.exports = {
   getPokemons,
   getFormattedPokemons,
   getFormattedPokemon,
+  doRelations,
 };

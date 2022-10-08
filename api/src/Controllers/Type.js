@@ -1,4 +1,5 @@
 
+
 const getTypes = (responseApi) => {
 
     return responseApi.data.results.map((t,i) => {
@@ -12,6 +13,8 @@ const getTypes = (responseApi) => {
 }
 
 
+
+
 module.exports = {
-    getTypes,
+    getTypes
   };

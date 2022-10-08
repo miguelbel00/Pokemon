@@ -5,6 +5,7 @@ const {
   getPokemons,
   getFormattedPokemons,
   getFormattedPokemon,
+  doRelations,
 } = require("../Controllers/Pokemon.js");
 
 const router = Router();
@@ -20,7 +21,6 @@ router.get("/", async (req, res,next) => {
       const pokemonsList = await getPokemons(urlApi, amountPokemons);
       const promisesPokemon = pokemonsList.map((p) => axios.get(p.url));
       const formattedPokemons = await getFormattedPokemons(promisesPokemon);
-      
       //pokemons Db
       const getPokemonsDb = await Pokemon.findAll()
       return res.status(200).send([...getPokemonsDb,...formattedPokemons]);
@@ -63,11 +63,11 @@ router.get("/:idPokemon", async (req, res,next) => {
 
 
 
-
 router.post('/',async (req,res,next) => {
     try {
-        const newPokemon = await Pokemon.create(req.body);
-        return res.status(201).json(newPokemon);
+        const newPokemon = await Pokemon.create(req.body,{include:Type});
+         const relationedPokemon = await doRelations(newPokemon,req.body.types) 
+        return res.status(201).json(relationedPokemon);
       } catch (error) {
         next(error)
       }
