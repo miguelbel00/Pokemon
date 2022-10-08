@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const pokemons = require('./routes/pokemons.js');
+const types = require('./routes/types');
 
 require('./db.js');
 
@@ -22,7 +24,16 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+
+server.use('/types', types);
+server.use('/pokemons', pokemons);
+
+server.use('/', (req,res) => {
+  return res.status(404).send({error: "Please, Check your route"})
+});
+
+ 
+
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
