@@ -36,7 +36,10 @@ const getFormattedPokemons = async (promisesPokemon) => {
         height: pokemon.height,
         weight: pokemon.weight,
         image: pokemon.sprites.front_default,
-        types: pokemon.types.map((type) => type.type.name),
+        Types: pokemon.types.map((type) => {
+      return {"name": type.type.name}
+        }
+          ),
       };
     });
   };

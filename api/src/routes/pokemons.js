@@ -22,7 +22,7 @@ router.get("/", async (req, res,next) => {
       const promisesPokemon = pokemonsList.map((p) => axios.get(p.url));
       const formattedPokemons = await getFormattedPokemons(promisesPokemon);
       //pokemons Db
-      const getPokemonsDb = await Pokemon.findAll()
+      const getPokemonsDb = await Pokemon.findAll({include:{model: Type,through:{attributes:[]}}})
       return res.status(200).send([...getPokemonsDb,...formattedPokemons]);
 
     }
