@@ -28,6 +28,7 @@ server.use('/types', types);
 server.use('/pokemons', pokemons);
 
 server.use('/', (req,res) => {
+  console.log("entro home")
   return res.status(404).send({error: "Please, Check your route"})
 });
 
@@ -37,9 +38,10 @@ server.use('/', (req,res) => {
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  return res.status(status).send(message);
+  console.log(err.message)
+  const message =  err.message;
+
+  return res.status(status).send({error:message});
 });
 
 module.exports = server;

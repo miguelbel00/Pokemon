@@ -52,9 +52,7 @@ const getFormattedPokemons = async (promisesPokemon) => {
 const getFormattedPokemon = (unformattedPokemon) => {
 
     pokemon = unformattedPokemon.data;
-    if (pokemon === "Not Found") {
-        return "not Found"
-    }
+
     return {
       id: pokemon.id,
       name: pokemon.name,

@@ -1,0 +1,19 @@
+
+Routes 
+
+get /pokemons?name
+
+si no tiene query name, trae todos los pk de la api ya formateados y de la bd
+si tiene query name, busca en la DB pokemon con ese nombre, luego busca en la api por ese nombre
+
+get /pokemons/:idPokemon
+
+se busca por el id del pk en la bd o en la api, si no hay nada retorna not found
+
+
+post /pokemons
+
+crea un pk en Db con lo que le llega por body
+
+
+

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Pokemon } = require("../db");
+const { Pokemon, Type} = require("../db");
 const axios = require("axios");
 const {
   getPokemons,
@@ -9,40 +9,41 @@ const {
 
 const router = Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res,next) => {
   const { name } = req.query;
   try {
-    
-    if (!name) {
 
+    if (!name) {
+      //pokemons api
       const urlApi = "https://pokeapi.co/api/v2/pokemon";
       const amountPokemons = 20; //20 40 60 80
       const pokemonsList = await getPokemons(urlApi, amountPokemons);
       const promisesPokemon = pokemonsList.map((p) => axios.get(p.url));
       const formattedPokemons = await getFormattedPokemons(promisesPokemon);
-      return res.status(200).send(formattedPokemons);
+      
+      //pokemons Db
+      const getPokemonsDb = await Pokemon.findAll()
+      return res.status(200).send([...getPokemonsDb,...formattedPokemons]);
 
     }
-    
+
     const findDbPokemon = await Pokemon.findOne({where:{name}});
 
     if (findDbPokemon == null) {
       const findApiPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-       return res.status(200).send(
-          !findApiPokemon
-            ? { error: "Not found" }
-            : getFormattedPokemon(findApiPokemon));
+       return res.status(200).send(getFormattedPokemon(findApiPokemon));
     }
 
     return res.status(200).send(getFormattedPokemon(findDbPokemon));
     
   } catch (error) {
-    return res.status(400).send({ error: error.response.data });
+    next(error)
+
   }
 });
 
 
-router.get("/:idPokemon", async (req, res, next) => {
+router.get("/:idPokemon", async (req, res,next) => {
   const { idPokemon } = req.params;
 
   try {
@@ -56,16 +57,19 @@ router.get("/:idPokemon", async (req, res, next) => {
 
     return res.status(200).send(getFormattedPokemon(findApiPokemon));
   } catch (error) {
-    next(error);
+    next(error)
   }
 });
+
+
+
 
 router.post('/',async (req,res,next) => {
     try {
         const newPokemon = await Pokemon.create(req.body);
         return res.status(201).json(newPokemon);
       } catch (error) {
-        next(error);
+        next(error)
       }
 
 })
