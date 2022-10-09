@@ -3,8 +3,14 @@ import * as actions from "./actions";
 const initialState = {
   types: [],
   pokemons: [],
-  filteredPokemons: [],
   pokemon: {},
+  pokemonsFiltered: [],
+  pokemonsFilters: {
+    origin: "AllPokemons",
+    orderTypes: "Type",
+    orderName: "Name",
+    orderAttack: "Attack",
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,7 +38,8 @@ const rootReducer = (state = initialState, action) => {
     case actions.SET_FILTEREDS_POKEMONS:
       return {
         ...state,
-        filteredPokemons: filterAndOrganize(state.pokemons,action.payload),
+        pokemonsFiltered: filterAndOrganize(state.pokemons, action.payload),
+        pokemonsFilters: action.payload,
       };
     default:
       return state;
@@ -53,38 +60,43 @@ const filterAndOrganize = (pokemons, features) => {
 };
 
 const originPokemons = (pokemons, feature) => {
-  feature === "Existing" &&
-    (pokemons = pokemons.filter((p) => !p.id.includes("-")));
-
-  feature === "Created" &&
-    (pokemons = pokemons.filter(
-      (p) => p.id.includes("-") && p.id.length === 36
-    ));
-
-  return pokemons;
+  return feature === "Existing"
+    ? pokemons.filter((p) => typeof p.id === "number")
+    : feature === "Created"
+    ? pokemons.filter((p) => typeof p.id === "string")
+    : pokemons;
 };
 
 const orderTypes = (pokemons, feature) => {
   return feature === "Type"
     ? pokemons
-    : pokemons.filter((p) => p.types.includes(feature));
+    : pokemons.filter((p) => {
+        if (p.Types.find((t) => t.name === feature)) return p;
+      });
 };
 const orderName = (pokemons, feature) => {
-  feature === "A-Z" && (pokemons = pokemons.sort());
+  feature === "A-Z" &&
+    pokemons.sort((a, b) => {
+      return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+    });
 
-  feature === "Z-A" && (pokemons = pokemons.reverse());
+  feature === "Z-A" &&
+    pokemons.sort((a, b) => {
+      return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
+    });
 
   return pokemons;
 };
 const orderAttack = (pokemons, feature) => {
   feature === "Descending" &&
-    (pokemons = pokemons.sort((a, b) => {
-      return a - b;
-    }));
+    pokemons.sort((a, b) => {
+      return a.attack < b.attack ? -1 : a.attack > b.attack ? 1 : 0;
+    });
   feature === "Ascending" &&
-    (pokemons = pokemons.sort((a, b) => {
-      return b - a;
-    }));
+    pokemons.sort((a, b) => {
+      return a.attack > b.attack ? -1 : a.attack < b.attack ? 1 : 0;
+    });
+
   return pokemons;
 };
 

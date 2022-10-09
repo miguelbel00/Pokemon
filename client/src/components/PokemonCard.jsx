@@ -15,13 +15,12 @@ const PokemonCard = (props) => {
 
     <div className="cards-container">
         {props.pokemons?.map(poke=>(
-
           <div className="card" key={poke.id}>
               <div className="card-title">
                   <Link to={`/pokemon/detail/${poke.id}`}>{poke.name}</Link>
               </div>
               <div className="card-body">
-                {console.log(poke.image)}
+              {/*   {console.log(poke.image)} */}
                 <img src={poke.image} alt={poke.name} />
                 <div className="card-types">
                   <p>Tipos: {poke.Types.map(p => p.name)}</p>
