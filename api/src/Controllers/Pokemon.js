@@ -81,6 +81,8 @@ const getFormattedPokemon = (unformattedPokemon) => {
 
 
 const doRelations = async (newPokemon, types) => {
+
+  types = types.map(t => upperCaseWord(t))
   await newPokemon.addTypes(await Type.findAll({ where: { name: types } }));
   return Pokemon.findOne({ where: { id: newPokemon.id },include:{model: Type,through:{attributes:[]}}});
 };

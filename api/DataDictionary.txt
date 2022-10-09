@@ -14,7 +14,7 @@ crea un pk en Db con lo que le llega por body
 
 
 
-AllPokemons		Type		Name 	 	OrderAttack 
+AllPokemons		Type		Name 	 	Attack 
 Existing		Earth		 A-Z		Ascending
 Created		    Water		 Z-A		Descending
 			    ....

@@ -48,7 +48,6 @@ router.get("/:idPokemon", async (req, res,next) => {
 
   try {
     if (idPokemon.includes("-") && idPokemon.length === 36) {
-      console.log("entro")
       const findDbPokemon = await Pokemon.findByPk(idPokemon,{include:{model: Type,through:{attributes:[]}}});
       return res.status(200).send(findDbPokemon);
     }
