@@ -13,6 +13,7 @@ post /pokemons
 crea un pk en Db con lo que le llega por body
 
 
+solamente se puede order por Name o Attack
 
 AllPokemons		Type		Name 	 	Attack 
 Existing		Earth		 A-Z		Ascending
