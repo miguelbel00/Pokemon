@@ -1,0 +1,14 @@
+
+body {
+    background-image: url('../utils/poke.jpg');
+    background-size:cover;
+    background-attachment: fixed
+}
+
+.home-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+

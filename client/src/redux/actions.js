@@ -9,16 +9,16 @@ const axios = require('axios')
 
 
 
-export const getAllPokemons = dispatch => {
+export const getAllPokemons = ()=> (dispatch) => {
 
         return axios
           .get(`http://localhost:3001/pokemons`)
-          .then((response) =>
-            dispatch({ type: GET_ALL_POKEMONS, payload: response.data })
-          );
+          .then((response) =>{
+            dispatch({ type: GET_ALL_POKEMONS, payload: response.data })}
+          ).catch(e => console.log(e.message));
       
 };
-export const getPokemon = idPokemon => dispatch => {
+export const getPokemon = (idPokemon) => (dispatch) => {
 
         return axios
           .get(`http://localhost:3001/pokemons/${idPokemon}`)
@@ -27,7 +27,7 @@ export const getPokemon = idPokemon => dispatch => {
           );
       
 };
-export const createPokemon = pokemon => dispatch => {
+export const createPokemon = (pokemon) => (dispatch) => {
 
         return axios
           .post(`http://localhost:3001/pokemons`,pokemon)
@@ -36,7 +36,7 @@ export const createPokemon = pokemon => dispatch => {
           );
       
 };
-export const getAllTypes = dispatch => {
+export const getAllTypes = ()=> dispatch => {
 
         return axios
           .get(`http://localhost:3001/types`)
@@ -45,7 +45,7 @@ export const getAllTypes = dispatch => {
           );
       
 };
-export const setFilteredPokemons = pokemons => dispatch => {
+export const setFilteredPokemons = (pokemons) => (dispatch) => {
 
         return dispatch({ type: SET_FILTEREDS_POKEMONS, payload: pokemons })
           
