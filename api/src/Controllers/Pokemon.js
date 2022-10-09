@@ -22,13 +22,17 @@ const getPokemons = async (urlApi, amount) => {
   return pokemons;
 };
 
+const upperCaseWord = (word) => {
+  return word.charAt(0).toUpperCase() + word.toLowerCase().slice(1)
+}
+
 const getFormattedPokemons = async (promisesPokemon) => {
   let formatPokemons = (unformattedPokemons) => {
     return unformattedPokemons.map((up) => {
       pokemon = up.data;
       return {
         id: pokemon.id,
-        name: pokemon.name,
+        name: upperCaseWord(pokemon.name),
         health: pokemon.stats[0].base_stat,
         attack: pokemon.stats[1].base_stat,
         defense: pokemon.stats[2].base_stat,
@@ -37,7 +41,7 @@ const getFormattedPokemons = async (promisesPokemon) => {
         weight: pokemon.weight,
         image: pokemon.sprites.front_default,
         Types: pokemon.types.map((type) => {
-      return {"name": type.type.name}
+      return {"name": upperCaseWord(type.type.name)}
         }
           ),
       };
@@ -51,12 +55,15 @@ const getFormattedPokemons = async (promisesPokemon) => {
   return formattedPokemons;
 };
 
+
+
+
 const getFormattedPokemon = (unformattedPokemon) => {
   pokemon = unformattedPokemon.data;
 
   return {
     id: pokemon.id,
-    name: pokemon.name,
+    name: upperCaseWord(pokemon.name),
     health: pokemon.stats[0].base_stat,
     attack: pokemon.stats[1].base_stat,
     defense: pokemon.stats[2].base_stat,
@@ -65,11 +72,13 @@ const getFormattedPokemon = (unformattedPokemon) => {
     weight: pokemon.weight,
     image: pokemon.sprites.front_default,
     Types: pokemon.types.map((type) => {
-      return {"name": type.type.name}
+      return {"name": upperCaseWord(type.type.name)}
         }
           ),
   };
 };
+
+
 
 const doRelations = async (newPokemon, types) => {
   await newPokemon.addTypes(await Type.findAll({ where: { name: types } }));
