@@ -1,0 +1,40 @@
+.main-footer {
+    opacity:0.8;
+    padding-top: 3em;
+    text-align: center;
+    width: 100%; 
+}
+
+
+.img-contact{
+    padding-right: 8px;
+    vertical-align: middle;
+    height: 50px;
+}
+
+/* .col {
+    
+    padding-top: 1%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    color: black;
+} */
+
+
+.col {
+padding: 0% 0% 1% 1%;
+    display: block;
+}
+
+.footer-about-me {
+    color: black;
+}
+.a-contact{
+    color: black;
+}
+
+

@@ -22,7 +22,7 @@ const PokemonCard = (props) => {
               <img src={poke.image} alt={poke.name} />
             )}
             <div className="card-types">
-              <p>Tipos: {poke.Types.map((p) => p.name)}</p>
+              <p>{poke.Types.map((p) => {return p.name+"  "})}</p>
             </div>
           </div>
         </div>

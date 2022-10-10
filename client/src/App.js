@@ -4,6 +4,7 @@ import CreatePokemon from './components/CreatePokemon';
 import PokemonDetail from './components/PokemonDetail';
 import Home from './components/Home';
 import Nav from './components/Nav';
+import Footer from "./components/Footer";
 
 
 
@@ -15,7 +16,7 @@ function App() {
       <Route exact path={"/pokemon"} component={Pokemons} />
       <Route path={"/pokemon/detail/:idPokemon"} component={PokemonDetail} />
       <Route path={"/pokemon/create"} component={CreatePokemon} />
-
+      <Route path={"/pokemon"} component={Footer} />
 
   </div>
   )
