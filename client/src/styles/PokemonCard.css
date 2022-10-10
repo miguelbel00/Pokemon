@@ -1,13 +1,14 @@
 .card {
     display: inline-block;
     margin: 20px ;
-    width: 18rem !important;
+    width: 16rem !important;
     transition: all 0.50s;
     justify-content: center;
     border-radius: 5px;
     border: 1px black;
     background-color: rgb(111, 241, 111);
     opacity: 0.8;
+    padding-top: 15px;
     
     
   }
