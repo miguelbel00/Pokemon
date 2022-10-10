@@ -20,5 +20,3 @@ Existing		Earth		 A-Z		Ascending
 Created		    Water		 Z-A		Descending
 			    ....
 
-
-
