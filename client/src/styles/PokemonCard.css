@@ -9,6 +9,8 @@
     background-color: rgb(111, 241, 111);
     opacity: 0.8;
     padding-top: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
     
     
   }
@@ -38,4 +40,8 @@
   }
   .card-title:hover{
     color: blue;
+  }
+
+  .cards-container {
+    min-height: calc(87.7vh - 287px)
   }

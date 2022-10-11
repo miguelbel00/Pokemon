@@ -11,6 +11,7 @@ const PokemonCard = (props) => {
     return <Loading />;
   }
 
+
   return (
     <div className="cards-container">
       {props.pokemons?.map((poke) => (
@@ -26,14 +27,16 @@ const PokemonCard = (props) => {
             )}
             <div className="card-types">
               <p>
-                {poke.Types.map((p) => {
+                 {poke.Types.map((p) => {
                   return p.name + "  ";
-                })}
+                }) 
+              }
               </p>
             </div>
           </div>
         </div>
       ))}
+      
     </div>
   );
 };
