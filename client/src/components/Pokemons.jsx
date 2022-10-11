@@ -4,6 +4,7 @@ import * as actions from "../redux/actions";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/Pokemons.css";
 
+
 const Pokemons = () => {
   const dispatch = useDispatch();
 

@@ -1,0 +1,15 @@
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(240, 255, 255, 0.37);
+    opacity:0.8;
+}
+
+.img-nav {
+    height: 56px;
+}
+
+.nav-element{
+    align-items: center;
+}

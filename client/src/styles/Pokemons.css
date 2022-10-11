@@ -12,3 +12,11 @@
     height: 150px;
     border-radius: 10px;
   } 
+
+
+
+body{
+  background-image: url('../utils/pokeFondo.png');
+  background-size:cover;
+  background-attachment: fixed;
+}

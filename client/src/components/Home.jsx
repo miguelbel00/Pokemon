@@ -1,21 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/Home.css";
+import pokeHome from '../utils/pokeHome.gif'
 
 const Home = () => {
-  const history = useHistory();
-
-  const redirectPokemons = (e) => {
-    e.preventDefault();
-    history.push("/pokemon");
-  };
 
   return (
     <div className="home-container">
       <div className="home-body">
-        <button onClick={redirectPokemons} className="btn-pokemons">
-          See the Pokemons!!!
-        </button>
+        <Link to={'/pokemon'}><img src={pokeHome}alt="PokeHome"/></Link>
       </div>
     </div>
   );
