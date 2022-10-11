@@ -4,55 +4,53 @@ import * as actions from "../redux/actions";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/Pokemons.css";
 
-
 const Pokemons = () => {
   const dispatch = useDispatch();
 
   const pokemonsState = useSelector((state) => state.pokemonsFiltered);
   const pokemonsFiltersState = useSelector((state) => state.pokemonsFilters);
   const typesState = useSelector((state) => state.types);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!pokemonsState.length) {
       const syncPokemons = async () => {
-        try {
-          setLoading(true);
-          await dispatch(actions.getAllTypes());
-          await dispatch(actions.getAllPokemons());
-          await dispatch(actions.setFilteredPokemons(pokemonsFiltersState));
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
+        dispatch(actions.setLoading(true));
+        await dispatch(actions.getAllTypes());
+        await dispatch(actions.getAllPokemons());
+        await dispatch(actions.setFilteredPokemons(pokemonsFiltersState));
+        dispatch(actions.setLoading(false));
       };
       syncPokemons();
     }
 
+   
+  }, []);
+
+
+  useEffect(() => {
     let syncFilters = () => {
       Object.values(pokemonsFiltersState).map((e) => {
         let element = document.getElementById(e);
-        element?.setAttribute("selected", "selected");
+         element?.setAttribute("selected", "selected"); 
       });
     };
     syncFilters();
-  }, []);
+  },[pokemonsFiltersState])
 
   const handleFilter = (e) => {
+
     let newFilters = {
       ...pokemonsFiltersState,
-      [e.target.className]: e.target.value,
+      [e.target.className]:e.target.value,
     };
+
     dispatch(actions.setFilteredPokemons(newFilters));
-  };
-  const handleSearch = () => {
-    //logic for search a pokemon
   };
 
   return (
     <div className="pokemons-container">
-      <div className="pokemons-tools">
         <div className="pokemons-options">
+          Filters:&nbsp;&nbsp;&nbsp;&nbsp;
           <div className="pokemons-origin">
             <select className="origin" onChange={handleFilter}>
               <option id="AllPokemons" value="AllPokemons">
@@ -66,6 +64,7 @@ const Pokemons = () => {
               </option>
             </select>
           </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <div className="pokemons-type">
             <select className="orderTypes" onChange={handleFilter}>
               <option id="Type" value="Type">
@@ -80,8 +79,9 @@ const Pokemons = () => {
               })}
             </select>
           </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <div className="pokemons-name">
-            <select className="orderName" onChange={handleFilter}>
+            <select className="orderName" onChange={handleFilter} >
               <option id="Name" value="Name">
                 Name
               </option>
@@ -93,6 +93,7 @@ const Pokemons = () => {
               </option>
             </select>
           </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <div className="pokemons-attack">
             <select className="orderAttack" onChange={handleFilter}>
               <option id="Attack" value="Attack">
@@ -107,16 +108,8 @@ const Pokemons = () => {
             </select>
           </div>
         </div>
-        <div className="pokemons-search">
-          <label>Pokemon: </label>
-          <input type="text" />
-        </div>
-        <div className="pokemons-button">
-          <button onClick={handleSearch}>Buscar</button>
-        </div>
-      </div>
       <div className="pokemons-cards">
-        <PokemonCard loading={loading} pokemons={pokemonsState} />
+        <PokemonCard pokemons={pokemonsState} />
       </div>
     </div>
   );

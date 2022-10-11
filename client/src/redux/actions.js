@@ -2,6 +2,7 @@ export const GET_POKEMON = "GET_POKEMON";
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_ALL_TYPES = "GET_ALL_TYPES";
+export const SET_LOADING = "SET_LOADING";
 export const SET_FILTEREDS_POKEMONS = "GET_FILTEREDS_POKEMONS";
 
 const axios = require('axios')
@@ -19,7 +20,9 @@ export const getAllPokemons = ()=> (dispatch) => {
       
 };
 export const getPokemon = (idPokemon) => (dispatch) => {
-
+        if (!idPokemon) {
+          return dispatch({ type: GET_POKEMON, payload: {} })
+        }
         return axios
           .get(`http://localhost:3001/pokemons/${idPokemon}`)
           .then((response) =>
@@ -51,6 +54,8 @@ export const setFilteredPokemons = (filters) => (dispatch) => {
       
 };
 
-
+export const setLoading = (data) => (dispatch) => {
+  return dispatch({ type: SET_LOADING, payload: data })
+}
 
 

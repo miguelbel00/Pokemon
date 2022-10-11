@@ -1,20 +1,28 @@
-import React,{useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux";
-import * as actions from '../redux/actions'
-import pokemonEgg from "../utils/pokemonEgg.png";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../redux/actions";
+import Loading from "./Loading";
 
 const PokemonDetail = (props) => {
-
-  const pokemonState = useSelector((state) => state.pokemon)
-  const dispatch = useDispatch()
-
+  const loadingState = useSelector((state) => state.loading);
+  const pokemonState = useSelector((state) => state.pokemon);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actions.getPokemon(props.match.params.idPokemon))
-
+    let syncPokemon = async () => {
+      dispatch(actions.setLoading(true));
+      await dispatch(actions.getPokemon(props.match.params.idPokemon));
+      dispatch(actions.setLoading(false));
+    };
+    syncPokemon();
+    return () => {
+      dispatch(actions.getPokemon());
+    };
   }, []);
 
+  if (loadingState) {
+    return <Loading />;
+  }
 
 
   return (
@@ -27,10 +35,9 @@ const PokemonDetail = (props) => {
       <p>{"Speed: "+pokemonState.speed}</p>
       <p>{"Height: "+pokemonState.height}</p>
       <p>{"Weight"+pokemonState.weight}</p>
-      {pokemonState?.image == "../utils/pokemonEgg.png"
-       ?  <img src={pokemonEgg} alt="pokemonImage"/>
-        : <img src={pokemonState.image} alt="pokemonImage"/>
-    }
+      <img src={pokemonState.image} alt={pokemonState.name} />
+      {/*  display my img by default 
+      <img src= "http://localhost:3000/utils/pokemonEgg.png"alt={pokemonState.name} /> */}
       <p>{"Types: "+pokemonState.Types?.map(t => t.name)}</p>
       
     </div>

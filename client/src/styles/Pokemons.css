@@ -13,10 +13,25 @@
     border-radius: 10px;
   } 
 
-
-
 body{
   background-image: url('../utils/pokeFondo.png');
   background-size:cover;
   background-attachment: fixed;
 }
+
+.pokemons-options {
+  background-color: #f0ffff4b;
+  padding: 2% 0%;
+  display: flex;
+  justify-content: center;
+
+}
+
+select {
+  cursor: pointer;
+  font-size: 15px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+

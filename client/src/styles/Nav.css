@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: rgba(240, 255, 255, 0.37);
+    background-color: #f0ffff5e;
     opacity:0.8;
 }
 
@@ -12,4 +12,25 @@
 
 .nav-element{
     align-items: center;
+    padding: 0px;
+    text-align: center;
+    
+}
+
+.nav-element-search {
+    display: flex;
+    padding: 1% 0% 0% 0%;
+    
+}
+
+.element-input {
+    padding-right: 20px;
+
+}
+
+input {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 30px;
+    font-size: 15px;
 }

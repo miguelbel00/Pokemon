@@ -1,17 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../styles/PokemonCard.css";
 import pokemonEgg from "../utils/pokemonEgg.png";
-import picaLoading from "../utils/picaLoading.gif";
+import Loading from "./Loading";
 
 const PokemonCard = (props) => {
-  if (props.loading) {
-    return (
-      <div>
-        <img src={picaLoading} alt="Loading Pokemons" />
-        <h1>LOADING ........</h1>;
-      </div>
-    );
+  const loadingState = useSelector((state) => state.loading);
+  if (loadingState) {
+    return <Loading />;
   }
 
   return (

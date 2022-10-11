@@ -9,8 +9,9 @@ const initialState = {
     origin: "AllPokemons",
     orderTypes: "Type",
     orderName: "Name",
-    orderAttack: "Attack",
+    orderAttack: "Attack"
   },
+  loading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -19,6 +20,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [...state.pokemons, action.payload],
+      };
+    case actions.SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       };
     case actions.GET_POKEMON:
       return {
@@ -39,12 +45,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonsFiltered: filterAndOrganize(state.pokemons, action.payload),
-        pokemonsFilters: action.payload,
+        pokemonsFilters: action.payload
       };
     default:
       return state;
   }
 };
+
+
 
 const filterAndOrganize = (pokemons, features) => {
   return orderAttack(
@@ -60,7 +68,6 @@ const filterAndOrganize = (pokemons, features) => {
 };
 
 const originPokemons = (pokemons, feature) => {
-
   return feature === "Existing"
     ? pokemons.filter((p) => typeof p.id === "number")
     : feature === "Created"
@@ -69,18 +76,17 @@ const originPokemons = (pokemons, feature) => {
 };
 
 const orderTypes = (pokemons, feature) => {
-
-   return feature === "Type"
+  return feature === "Type"
     ? pokemons
     : pokemons.filter((p) => {
         if (p.Types.find((t) => t.name === feature)) return p;
-      }); 
+      });
 };
 const orderName = (pokemons, feature) => {
   feature === "A-Z" &&
     pokemons.sort((a, b) => {
       return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
-    })
+    });
 
   feature === "Z-A" &&
     pokemons.sort((a, b) => {
