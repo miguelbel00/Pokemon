@@ -4,7 +4,7 @@ import "../styles/Footer.css";
 import github from "../utils/github.png";
 import gmail from "../utils/gmail(1).png";
 
-function Footer() {
+const Footer = () =>{
 
 
 
