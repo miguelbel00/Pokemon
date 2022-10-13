@@ -28,7 +28,6 @@ server.use('/types', types);
 server.use('/pokemons', pokemons);
 
 server.use('/', (req,res) => {
-  console.log("entro home")
   return res.status(404).send({error: "Please, Check your route"})
 });
 
