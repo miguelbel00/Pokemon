@@ -22,10 +22,7 @@ const Pokemons = () => {
       };
       syncPokemons();
     }
-
-   
   }, []);
-
 
   useEffect(() => {
     let syncFilters = () => {
@@ -38,12 +35,7 @@ const Pokemons = () => {
   },[pokemonsFiltersState])
 
   const handleFilter = (e) => {
-
-    let newFilters = {
-      ...pokemonsFiltersState,
-      [e.target.className]:e.target.value,
-    };
-
+    let newFilters = {...pokemonsFiltersState,[e.target.className]:e.target.value};
     dispatch(actions.setFilteredPokemons(newFilters));
   };
 

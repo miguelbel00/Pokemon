@@ -6,14 +6,11 @@ import gmail from "../utils/gmail(1).png";
 
 const Footer = () =>{
 
-
-
   const clickGmail = (e)=> {
     e.preventDefault()
     navigator.clipboard.writeText("miguelabeltranp@gmail.com")
     alert("Gmail Copiado")
   }
-
 
   return (
     <footer className="main-footer">

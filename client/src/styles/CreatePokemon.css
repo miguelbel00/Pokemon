@@ -43,3 +43,9 @@
     height: 22px;
     padding-left: 5px;
 }
+
+.pokemon-types img {
+    cursor: pointer;
+    height: 22px;
+    padding-left: 5px;
+}
