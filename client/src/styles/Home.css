@@ -16,8 +16,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+     
+}
 
-    
+.home-container img {
+        height: 150px;
+        border-radius: 10px;
 }
 

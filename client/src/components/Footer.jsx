@@ -34,7 +34,7 @@ const Footer = () =>{
             </div>
           </div>
           <div className="col">
-            <Link className="footer-about-me" to={"/about"}>
+            <Link className="footer-about-me" to={"/pokemon/about"}>
               About Me
             </Link>
           </div>

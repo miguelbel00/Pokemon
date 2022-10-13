@@ -16,7 +16,7 @@ const PokemonCard = (props) => {
       {props.pokemons?.map((poke) => (
         <div className="card" key={poke.id}>
           <div className="card-title">
-            <Link to={`/pokemon/detail/${poke.id}`}>{poke.name}</Link>
+            <Link  className="title" to={`/pokemon/detail/${poke.id}`}>{poke.name}</Link>
           </div>
           <div className="card-body">
             {poke.image === "../utils/pokemonEgg.png" ? <img src={pokemonEgg} alt={poke.name} /> : <img src={poke.image} alt={poke.name} /> }
