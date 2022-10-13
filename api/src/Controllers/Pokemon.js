@@ -38,7 +38,7 @@ const getFormattedPokemons = async (promisesPokemon) => {
         speed: pokemon.stats[5].base_stat,
         height: pokemon.height,
         weight: pokemon.weight,
-        image: pokemon.sprites.front_default,
+        image: pokemon.sprites.other.dream_world.front_default,
         Types: pokemon.types.map((type) => {
           return { name: upperCaseWord(type.type.name) };
         }),
@@ -64,7 +64,7 @@ const getFormattedPokemon = (unformattedPokemon) => {
     speed: pokemon.stats[5].base_stat,
     height: pokemon.height,
     weight: pokemon.weight,
-    image: pokemon.sprites.front_default,
+    image: pokemon.sprites.other.dream_world.front_default,
     Types: pokemon.types.map((type) => {
       return { name: upperCaseWord(type.type.name) };
     }),
