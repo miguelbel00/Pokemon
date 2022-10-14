@@ -1,47 +1,47 @@
-import React from "react";
-import '../styles/Paginate.css'
+import React, { useEffect } from "react";
+import "../styles/Paginate.css";
 
 const Paginate = ({ pokemonsAmount, pagination, currentPage }) => {
   let pageNumber = [];
-
-  const syncPaginate = (number) => {
-    if (number >= 4) {
-        pageNumber = []
-      for (let i = 1; i <= 5; i++) {
-        console.log(i)
-
-        pageNumber.push((number-3)+i);
+  let limitPages = Math.ceil(pokemonsAmount / 2) + 1;
+  const syncPages = (currentPage) => {
+    if (currentPage >= limitPages - 2 && limitPages != 1) {
+      for (let j = 1; j <= 5; j++) {
+        pageNumber.push(limitPages - 6 + j);
+      }
+    } else if (currentPage >= 4) {
+      for (let k = 1; k <= 5; k++) {
+        pageNumber.push(currentPage - 3 + k);
       }
     } else {
-      for (let i = 1; i < Math.ceil(pokemonsAmount / 2) + 1; i++) {
-        if (i==5) {
-            pageNumber.push(i);
-            break
+      for (let i = 1; i < limitPages; i++) {
+        if (i === 5) {
+          pageNumber.push(i);
+          break;
         }
         pageNumber.push(i);
       }
     }
-    console.log(pageNumber)
   };
+  syncPages(currentPage);
 
-  syncPaginate(currentPage);
   return (
     <nav>
       <ul>
         <li>
           <button onClick={() => pagination(1)}>First</button>
         </li>
-
         {pageNumber.map((number) => (
           <li key={number}>
-            <button className={number==currentPage ? "current-page":"page"} onClick={() => pagination(number)}>
+            <button
+              className={number === currentPage ? "current-page" : "page"}
+              onClick={() => pagination(number)}
+            >
               {number}
             </button>
           </li>
         ))}
-        <button onClick={() => pagination(pageNumber[pageNumber.length - 1])}>
-          Last
-        </button>
+        <button onClick={() => pagination(limitPages - 1)}>Last</button>
       </ul>
     </nav>
   );
