@@ -1,8 +1,9 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/actions";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/Pokemons.css";
+import Paginate from "./Paginate";
 
 const Pokemons = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,14 @@ const Pokemons = () => {
   const pokemonsState = useSelector((state) => state.pokemonsFiltered);
   const pokemonsFiltersState = useSelector((state) => state.pokemonsFilters);
   const typesState = useSelector((state) => state.types);
+  const [currentePage, setCurrentPage] = useState(1)
+
+
+  let nextPokemons = currentePage * 2
+  let lastPokemons = nextPokemons - 2
+  let actualPokemons = pokemonsState.slice(lastPokemons,nextPokemons)
+  const pagination = (numberPage) => setCurrentPage(numberPage) 
+
 
   useEffect(() => {
     if (!pokemonsState.length) {
@@ -100,8 +109,11 @@ const Pokemons = () => {
             </select>
           </div>
         </div>
+      <div>
+        <Paginate currentPage={currentePage} pokemonsAmount={pokemonsState.length} pagination={pagination}/>
+      </div>
       <div className="pokemons-cards">
-        <PokemonCard pokemons={pokemonsState} />
+        <PokemonCard pokemons={actualPokemons} />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ router.get("/", async (req, res, next) => {
     if (!name) {
       //pokemons api
       const urlApi = "https://pokeapi.co/api/v2/pokemon";
-      const amountPokemons = 20; //20 40 60 80
+      const amountPokemons = 40; //20 40 60 80
       const pokemonsList = await getPokemons(urlApi, amountPokemons);
       const promisesPokemon = pokemonsList.map((p) => axios.get(p.url));
       const formattedPokemons = await getFormattedPokemons(promisesPokemon);
