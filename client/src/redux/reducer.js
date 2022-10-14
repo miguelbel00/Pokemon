@@ -51,7 +51,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonsFiltered: 
-        searchPokemon(state.pokemonsFiltered, action.payload,state.pokemons) == false 
+        searchPokemon(state.pokemonsFiltered, action.payload,state.pokemons) === false 
         ? filterAndOrganize(state.pokemons, state.pokemonsFilters) 
         : searchPokemon(state.pokemonsFiltered, action.payload,state.pokemons)
       };

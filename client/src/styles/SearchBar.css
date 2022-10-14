@@ -12,6 +12,10 @@
 
 }
 
+.img-nav {
+    cursor: pointer;
+}
+
 .dropdown-row {
     cursor: pointer;
     text-align: start;

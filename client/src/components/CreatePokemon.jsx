@@ -11,7 +11,7 @@ const CreatePokemon = () => {
   const typesState = useSelector((state) => state.types);
   const [typesPokemon, setTypesPokemon] = useState(["Normal"]);
   const [input, setInput] = useState({
-    name: "",
+    name: "Pikachu",
     health: "0",
     attack: "0",
     defense: "0",
@@ -32,7 +32,7 @@ const CreatePokemon = () => {
     e.preventDefault();
     let aux = Object.values(errors).find((e) => e !== "OK");
     if (aux) return alert("tienes errores, verifica");
-    /* dipatch(actions.createPokemon(input)); */
+     dipatch(actions.createPokemon(input)); 
     return alert("creado");
   };
 
@@ -98,7 +98,7 @@ const CreatePokemon = () => {
               return handleSelectType(e) + handleInputChange(e)}}>
             {typesState?.map((t, i) => {
               return (
-                <option value={t.name} key={i + 1}>
+                <option  value={t.name} key={i + 1}>
                   {t.name}
                 </option>);
             })}
@@ -107,11 +107,11 @@ const CreatePokemon = () => {
           <div>
             {input.types.map((t, i) => {
               return (
-                <div className="pokemon-types">
+                <div key={i} className="pokemon-types">
                   <p name={"type"} key={i + 1}>
                     {t}
                   </p>
-                  <img src={removeType} name={t} alt="removeType" onClick={handleRemoveType}/>
+                  <img key={t} src={removeType} name={t} alt="removeType" onClick={handleRemoveType}/>
                 </div>);
             })}
           </div>

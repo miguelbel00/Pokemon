@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/Paginate.css";
 
 const Paginate = ({ pokemonsAmount, pagination, currentPage }) => {
@@ -28,14 +28,12 @@ const Paginate = ({ pokemonsAmount, pagination, currentPage }) => {
   };
   syncPages(currentPage);
 
-
-
   return (
     <nav className="paginate-container">
     <ul className="paginate-pages">
       <button onClick={() => pagination(1)}>First</button>
       {numberPages.map((number) => (
-          <button className={number === currentPage ? "current-page" : "page"} onClick={() => pagination(number)}>
+          <button key={number} className={number === currentPage ? "current-page" : "page"} onClick={() => pagination(number)}>
             {number}
           </button>
       ))}
