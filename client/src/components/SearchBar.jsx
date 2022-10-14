@@ -10,12 +10,13 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const handleWord = (e) => {
-    setWord(e.target.value);
+
+    setWord(e.target.value ? e.target.value:e.target.id);
+
   };
   const handleSearch = () => {
     return dispatch(actions.getPokemonSearch(word));
   };
-
   return (
     <div className="container-search">
       <div className="element-input">
@@ -29,14 +30,13 @@ const SearchBar = () => {
         <div className="dropdown">
         {pokemonsState.filter(p => {
 
-            let searchWord =  word.charAt(0).toUpperCase() + word.toLowerCase().slice(1);
+            let searchWord =  word?.charAt(0).toUpperCase() + word?.toLowerCase().slice(1);
             return searchWord && p.name.startsWith(searchWord) && p.name !== searchWord
         }).slice(0,5)
         .map(p => (
 
-            <div key={p.id}onClick={handleWord} className="dropdown-row" value={p.name}>
+            <div key={p.id}onClick={handleWord} className="dropdown-row" id={p.name}>
                 <img src={p.image}  alt={p.name} /> 
-{            console.log(p.name)}
                 {p.name}
             </div>
 

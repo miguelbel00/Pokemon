@@ -3,7 +3,9 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: #f0ffff5e;
+    position: relative;
     opacity:0.8;
+    z-index: 9;
 }
 
 .img-nav {
