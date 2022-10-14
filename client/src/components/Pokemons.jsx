@@ -46,6 +46,7 @@ const Pokemons = () => {
   const handleFilter = (e) => {
     let newFilters = {...pokemonsFiltersState,[e.target.className]:e.target.value};
     dispatch(actions.setFilteredPokemons(newFilters));
+    setCurrentPage(1)
   };
 
   return (
@@ -109,11 +110,11 @@ const Pokemons = () => {
             </select>
           </div>
         </div>
-      <div>
-        <Paginate currentPage={currentePage} pokemonsAmount={pokemonsState.length} pagination={pagination}/>
-      </div>
       <div className="pokemons-cards">
         <PokemonCard pokemons={actualPokemons} />
+      </div>
+      <div className="pokemons-pages">
+        <Paginate currentPage={currentePage} pokemonsAmount={pokemonsState.length} pagination={pagination}/>
       </div>
     </div>
   );
