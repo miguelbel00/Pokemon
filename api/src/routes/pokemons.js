@@ -47,8 +47,11 @@ router.get("/:idPokemon", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
+
   try {
-    const newPokemon = await Pokemon.create(req.body, {include: { model: Type, through: { attributes: [] } }});
+    const { name,health,attack,defense,speed,height,weight,types} = req.body
+    const pokemon = {name:name.charAt(0).toUpperCase() + name.toLowerCase().slice(1),health,attack,defense,speed,height,weight,types}
+    const newPokemon = await Pokemon.create(pokemon, {include: { model: Type, through: { attributes: [] } }});
     const relationedPokemon = await doRelations(newPokemon, req.body.types);
     return res.status(201).json(relationedPokemon);
   } catch (error) {
