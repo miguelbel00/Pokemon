@@ -99,7 +99,10 @@ const orderTypes = (pokemons, feature) => {
   return feature === "Type"
     ? pokemons
     : pokemons.filter((p) => {
-        if (p.Types.find((t) => t.name === feature)) return p;
+        if (p.Types.find((t) => t.name === feature)) {
+          return p;
+        }
+        return null 
       });
 };
 const orderName = (pokemons, feature) => {

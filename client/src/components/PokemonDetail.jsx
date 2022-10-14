@@ -7,9 +7,10 @@ import "../styles/PokemonDetail.css";
 const PokemonDetail = (props) => {
   const loadingState = useSelector((state) => state.loading);
   const pokemonState = useSelector((state) => state.pokemon);
-  const dispatch = useDispatch();
 
+  let dispatch = useDispatch();
   useEffect(() => {
+    
     let syncPokemon = async () => {
       dispatch(actions.setLoading(true));
       await dispatch(actions.getPokemon(props.match.params.idPokemon));
@@ -19,6 +20,7 @@ const PokemonDetail = (props) => {
     return () => {
       dispatch(actions.getPokemon());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loadingState) {

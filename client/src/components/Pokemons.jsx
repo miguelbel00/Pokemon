@@ -31,16 +31,18 @@ const Pokemons = () => {
       };
       syncPokemons();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     let syncFilters = () => {
       Object.values(pokemonsFiltersState).map((e) => {
         let element = document.getElementById(e);
-         element?.setAttribute("selected", "selected"); 
+         return element?.setAttribute("selected", "selected"); 
       });
     };
     syncFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[pokemonsFiltersState])
 
   const handleFilter = (e) => {
