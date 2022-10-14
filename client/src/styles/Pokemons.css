@@ -6,6 +6,9 @@
   max-width: 100%;
   position: relative;
   background-color: rgba(73, 73, 75, 0.089);
+
+    z-index: -1;
+
 }
 
 body {

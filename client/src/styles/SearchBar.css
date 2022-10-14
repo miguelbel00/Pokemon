@@ -9,6 +9,25 @@
     align-items: center;
     display: flex;
     padding: 1% 0% 0% 0%;
-    
 
+}
+
+.dropdown-row {
+    cursor: pointer;
+    text-align: start;
+    margin: 2px 0;
+}
+
+
+.dropdown{
+    width: 10%;
+    background-color: aliceblue;
+    position:fixed;
+    border-radius: 8px;
+    z-index: 900;
+}
+
+.dropdown img{
+height: 20px;
+padding: 2% 10% 2% 2%;
 }
