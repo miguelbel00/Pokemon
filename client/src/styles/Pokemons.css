@@ -1,18 +1,16 @@
 .pokemons-cards {
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    max-width: 100%;
-    position: relative;
-    background-color: rgba(73, 73, 75, 0.089);
-  }
-  
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  max-width: 100%;
+  position: relative;
+  background-color: rgba(73, 73, 75, 0.089);
+}
 
-
-body{
-  background-image: url('../utils/pokeFondo.png');
-  background-size:cover;
+body {
+  background-image: url("../utils/pokeFondo.png");
+  background-size: cover;
   background-attachment: fixed;
 }
 
@@ -21,7 +19,6 @@ body{
   padding: 2% 0%;
   display: flex;
   justify-content: center;
-
 }
 
 select {
@@ -32,7 +29,6 @@ select {
   border-radius: 30px;
 }
 
-.pokemons-pages{
-  
+.pokemons-pages {
   background-color: rgba(73, 73, 75, 0.089);
 }

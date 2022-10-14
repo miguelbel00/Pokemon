@@ -4,6 +4,7 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const SET_LOADING = "SET_LOADING";
 export const SET_FILTEREDS_POKEMONS = "GET_FILTEREDS_POKEMONS";
+export const GET_POKEMON_SEARCH = "GET_POKEMON_SEARCH";
 
 const axios = require('axios')
 /* export const SET_PAGE = "SET_PAGE"; */
@@ -56,6 +57,10 @@ export const setFilteredPokemons = (filters) => (dispatch) => {
 
 export const setLoading = (data) => (dispatch) => {
   return dispatch({ type: SET_LOADING, payload: data })
+}
+
+export const getPokemonSearch = (word) => (dispatch) => {
+  return dispatch({ type: GET_POKEMON_SEARCH, payload: word })
 }
 
 

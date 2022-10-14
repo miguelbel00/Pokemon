@@ -47,10 +47,30 @@ const rootReducer = (state = initialState, action) => {
         pokemonsFiltered: filterAndOrganize(state.pokemons, action.payload),
         pokemonsFilters: action.payload
       };
+    case actions.GET_POKEMON_SEARCH:
+      return {
+        ...state,
+        pokemonsFiltered: 
+        searchPokemon(state.pokemonsFiltered, action.payload,state.pokemons) == false 
+        ? filterAndOrganize(state.pokemons, state.pokemonsFilters) 
+        : searchPokemon(state.pokemonsFiltered, action.payload,state.pokemons)
+      };
     default:
       return state;
   }
 };
+
+const searchPokemon= (pokemons,word) => {
+
+  word =  word.charAt(0).toUpperCase() + word.toLowerCase().slice(1);
+
+  let resultSearch = pokemons.filter(p => p.name ===word)
+  if (!resultSearch.length) {
+    alert("Pokemon Not Found")
+    return   false
+  }
+  return resultSearch
+}
 
 
 

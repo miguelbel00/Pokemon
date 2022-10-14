@@ -9,7 +9,7 @@ const Footer = () =>{
   const clickGmail = (e)=> {
     e.preventDefault()
     navigator.clipboard.writeText("miguelabeltranp@gmail.com")
-    alert("Gmail Copiado")
+    alert("Gmail copied in clipboard")
   }
 
   return (
@@ -17,7 +17,7 @@ const Footer = () =>{
       <div className="container">
           <div className="col">
             <ul className="list-unstyled">
-              <li>Developed For Miguel Angel Beltran</li>
+              <p >Developed For Miguel Angel Beltran</p>
             </ul>
           </div>
           <div className="col">
