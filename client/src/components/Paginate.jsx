@@ -3,7 +3,7 @@ import "../styles/Paginate.css";
 
 const Paginate = ({ pokemonsAmount, pagination, currentPage }) => {
   let numberPages = [];
-  let limitPages = Math.ceil(pokemonsAmount / 2) + 1;
+  let limitPages = Math.ceil(pokemonsAmount / 12) + 1;
   
   const syncPages = (currentPage) => {
     if (currentPage >= limitPages - 2 && limitPages >=5 ) {

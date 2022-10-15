@@ -14,8 +14,8 @@ const Pokemons = () => {
   const [currentePage, setCurrentPage] = useState(1)
 
 
-  let nextPokemons = currentePage * 2
-  let lastPokemons = nextPokemons - 2
+  let nextPokemons = currentePage * 12
+  let lastPokemons = nextPokemons - 12
   let actualPokemons = pokemonsState.slice(lastPokemons,nextPokemons)
   const pagination = (numberPage) => setCurrentPage(numberPage) 
 
