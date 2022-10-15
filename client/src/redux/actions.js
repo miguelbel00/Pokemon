@@ -5,7 +5,7 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const SET_LOADING = "SET_LOADING";
 export const SET_FILTEREDS_POKEMONS = "GET_FILTEREDS_POKEMONS";
 export const GET_POKEMON_SEARCH = "GET_POKEMON_SEARCH";
-
+const serverBack = "pokemon.up.railway.app"
 const axios = require('axios')
 /* export const SET_PAGE = "SET_PAGE"; */
 
@@ -14,7 +14,7 @@ const axios = require('axios')
 export const getAllPokemons = ()=> (dispatch) => {
 
         return axios
-          .get(`http://localhost:3001/pokemons`)
+          .get(`https://${serverBack}/pokemons`)
           .then((response) =>{
             dispatch({ type: GET_ALL_POKEMONS, payload: response.data })}
           ).catch(e => console.log(e.message));
@@ -25,7 +25,7 @@ export const getPokemon = (idPokemon) => (dispatch) => {
           return dispatch({ type: GET_POKEMON, payload: {} })
         }
         return axios
-          .get(`http://localhost:3001/pokemons/${idPokemon}`)
+          .get(`https://${serverBack}/pokemons/${idPokemon}`)
           .then((response) =>
             dispatch({ type: GET_POKEMON, payload: response.data })
           );
@@ -34,7 +34,7 @@ export const getPokemon = (idPokemon) => (dispatch) => {
 export const createPokemon = (pokemon) => (dispatch) => {
 
         return axios
-          .post(`http://localhost:3001/pokemons`,pokemon)
+          .post(`https://${serverBack}/pokemons`,pokemon)
           .then((response) =>
             dispatch({ type: CREATE_POKEMON, payload: response.data })
           );
@@ -43,7 +43,7 @@ export const createPokemon = (pokemon) => (dispatch) => {
 export const getAllTypes = ()=> dispatch => {
 
         return axios
-          .get(`http://localhost:3001/types`)
+          .get(`https://${serverBack}/types`)
           .then((response) =>
             dispatch({ type: GET_ALL_TYPES, payload: response.data })
           );
