@@ -5,7 +5,7 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const SET_LOADING = "SET_LOADING";
 export const SET_FILTEREDS_POKEMONS = "GET_FILTEREDS_POKEMONS";
 export const GET_POKEMON_SEARCH = "GET_POKEMON_SEARCH";
-const serverBack = "pokemon.up.railway.app"
+const serverBack = "pokemonBack.up.railway.app"
 const axios = require('axios')
 /* export const SET_PAGE = "SET_PAGE"; */
 
