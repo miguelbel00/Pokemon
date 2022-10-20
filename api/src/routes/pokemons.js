@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
   destination: path.join(__dirname+'../../../public'),
   filename: (req,file,cb) => {
     console.log(path.join(__dirname+'../../../public'))
+    console.log(path.join(__dirname))
     cb(null,new Date().getTime()+"."+file.mimetype.split('/').pop())}
 })
 const upload =  multer({storage:storage,dest: path.join(__dirname+'../../../public')})
