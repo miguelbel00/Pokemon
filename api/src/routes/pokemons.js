@@ -7,7 +7,9 @@ const multer = require('multer')
 const path = require('path')
 const storage = multer.diskStorage({
   destination: path.join(__dirname+'../../../public'),
-  filename: (req,file,cb) => {cb(null,new Date().getTime()+"."+file.mimetype.split('/').pop())}
+  filename: (req,file,cb) => {
+    console.log(path.join(__dirname+'../../../public'))
+    cb(null,new Date().getTime()+"."+file.mimetype.split('/').pop())}
 })
 const upload =  multer({storage:storage,dest: path.join(__dirname+'../../../public')})
 
