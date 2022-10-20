@@ -8,8 +8,6 @@ const path = require('path')
 const storage = multer.diskStorage({
   destination: path.join(__dirname+'../../../public'),
   filename: (req,file,cb) => {
-    console.log(path.join(__dirname+'../../../public'))
-    console.log(path.join(__dirname))
     cb(null,new Date().getTime()+"."+file.mimetype.split('/').pop())}
 })
 const upload =  multer({storage:storage,dest: path.join(__dirname+'../../../public')})
@@ -72,7 +70,6 @@ router.post("/", async (req, res, next) => {
 
 router.post('/image',upload.single('imagePokemon'), (req, res, next) => {
   try {
-    console.log(req.file)
     return res.status(201).json({path:req.file.filename})
   } catch (error) {
     next(error)
