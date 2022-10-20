@@ -33,8 +33,6 @@ const PokemonDetail = (props) => {
         <h3>{pokemonState.name}</h3>
         <div className="pokemon-detail-image">
           <img src={pokemonState.image} alt={pokemonState.name} />
-          {/*  display my img by default 
-        <img src= "http://localhost:3000/utils/pokemonEgg.png"alt={pokemonState.name} /> */}
         </div>
         <div className="pokemon-body">
           <p>{"Id: " + pokemonState.id}</p>

@@ -5,9 +5,9 @@ import "../styles/CreatePokemon.css";
 import addType from "../utils/plusPokemon.png";
 import removeType from "../utils/remove.png";
 
-const CreatePokemon = () => {
-  const dipatch = useDispatch();
 
+const CreatePokemon = () => {
+  const dispatch = useDispatch("");
   const typesState = useSelector((state) => state.types);
   const [typesPokemon, setTypesPokemon] = useState(["Normal"]);
   const [input, setInput] = useState({
@@ -19,6 +19,7 @@ const CreatePokemon = () => {
     height: "0",
     weight: "0",
     types: ["Normal"],
+    image : "pokemonEgg.png"
   });
 
   const [errors, setErrors] = useState({});
@@ -28,12 +29,17 @@ const CreatePokemon = () => {
     setErrors(validate({...input,[e.target.name]: e.target.value}));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    let aux = Object.values(errors).find((e) => e !== "OK");
-    if (aux) return alert("tienes errores, verifica");
-     dipatch(actions.createPokemon(input)); 
-    return alert("creado");
+    let hasErros = Object.values(errors).find((e) => e !== "OK");
+    if (hasErros) return alert("tienes errores, verifica");
+    else if (typeof input.image === 'string') {
+      dispatch(actions.createPokemon(input,input.image));      
+    }else{
+      let imagePath = await actions.uploadImage(input)
+      dispatch(actions.createPokemon(input,imagePath.data.path)); 
+    }
+     alert("Pokemon Created");
   };
 
   const handleAddType = () => {
@@ -48,14 +54,20 @@ const CreatePokemon = () => {
   const handleRemoveType = (e) => {
     let typesFiltered = typesPokemon.filter((t) => t !== e.target.name);
     setTypesPokemon(typesFiltered);
-
     setInput({...input,types: typesFiltered});
     setErrors(validate({...input,types: typesFiltered}));
   };
 
+  const handleLoad = (e) => {
+    setInput({
+      ...input,
+      image: e.target.files[0]
+    }) 
+  }
+
   return (
     <div className="container-create">
-      <form onSubmit={handleSubmit} className="create-pokemon">
+      <form onSubmit={handleSubmit} className="create-pokemon" >
         <h3>New Pokemon</h3>
         <div className="pokemon-stats">
           <label>Name: </label>
@@ -118,12 +130,17 @@ const CreatePokemon = () => {
           {errors.types !== "OK" && <p className="danger"> {errors.types} </p>}
         </div>
         <div className="pokemon-stats">
-          <button type="submit">Submit</button>
+            <label >If you have an image upload it</label>
+            <input type="file" name="image-Pokemon" accept="image/*"  onChange={handleLoad}/>
         </div>
+         <div className="pokemon-stats">
+          <button type="submit">Submit</button>
+        </div> 
       </form>
     </div>
   );
 };
+
 
 const validate = (input) => {
   let errors = {};
@@ -171,7 +188,6 @@ const validate = (input) => {
     : "OK";
 
   errors.types = input.types.length === 0 ? "Please add one type" : "OK";
-
   return errors;
 };
 
