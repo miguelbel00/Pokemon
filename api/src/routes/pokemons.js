@@ -69,6 +69,7 @@ router.post("/", async (req, res, next) => {
 
 router.post('/image',upload.single('imagePokemon'), (req, res, next) => {
   try {
+    console.log(req.file)
     return res.status(201).json({path:req.file.filename})
   } catch (error) {
     next(error)
