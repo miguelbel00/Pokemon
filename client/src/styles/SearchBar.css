@@ -3,6 +3,9 @@
     padding-right: 20px;
 
 }
+input{
+    width: 18vh;
+}
 
 .container-search{
 
@@ -24,7 +27,7 @@
 
 
 .dropdown{
-    width: 10%;
+    width: 18vh;
     background-color: aliceblue;
     position:fixed;
     border-radius: 8px;
